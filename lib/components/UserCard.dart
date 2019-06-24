@@ -10,7 +10,7 @@ class UserCard extends StatelessWidget {
         // padding: EdgeInsets.only(top: 20),
         margin: EdgeInsets.all(20),
         // width: size.width,
-        height: size.height * 0.65,
+        height: size.height * 0.6,
         child: Stack(
           overflow: Overflow.visible,
           children: <Widget>[
