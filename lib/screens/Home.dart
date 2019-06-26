@@ -8,6 +8,12 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final pageController = PageController(viewportFraction: 0.8);
+  int currentPageViewItem = 0;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +25,26 @@ class _HomeState extends State<Home> {
             physics: BouncingScrollPhysics(),
             controller: pageController,
             itemBuilder: (BuildContext context, int index) {
-              return _buildPage(context, index);
+              bool active = currentPageViewItem == index;
+              return Align(child: UserCard(index: index, active: active, onTap: _onItemTap));
             },
             itemCount: 10,
+            onPageChanged: (int index) {
+              if (currentPageViewItem != index) {
+                setState(() {
+                  currentPageViewItem = index;
+                  print('currentPageViewItem:' + currentPageViewItem.toString());
+                });
+              }
+            },
           ),
         ),
         Container(width: double.infinity, child: MyBalance()),
       ],
     );
   }
-
-  Widget _buildPage(BuildContext context, int index) {
-    return Align(child: UserCard());
+  void _onItemTap(int index){
+    print('$index');
   }
 
   @override
